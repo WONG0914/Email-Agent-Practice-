@@ -1,0 +1,594 @@
+/* 2000年代美国复古风格 - MailSummit 2000 */
+
+:root {
+    --retro-bg: #0a0a0a;
+    --retro-surface: #1a1a1a;
+    --retro-border: #333;
+    --retro-primary: #00ff41;
+    --retro-secondary: #0080ff;
+    --retro-warning: #ff6600;
+    --retro-text: #c0c0c0;
+    --retro-text-bright: #ffffff;
+    --retro-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    --retro-glow: 0 0 20px rgba(0, 255, 65, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    background: var(--retro-bg);
+    color: var(--retro-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* CRT 显示器效果 */
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 65, 0.03),
+        rgba(0, 255, 65, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1000;
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.27861; }
+    5% { opacity: 0.34769; }
+    10% { opacity: 0.23604; }
+    15% { opacity: 0.90626; }
+    20% { opacity: 0.18128; }
+    25% { opacity: 0.83891; }
+    30% { opacity: 0.65583; }
+    35% { opacity: 0.67807; }
+    40% { opacity: 0.26559; }
+    45% { opacity: 0.84693; }
+    50% { opacity: 0.96019; }
+    55% { opacity: 0.08594; }
+    60% { opacity: 0.20313; }
+    65% { opacity: 0.71988; }
+    70% { opacity: 0.53455; }
+    75% { opacity: 0.37288; }
+    80% { opacity: 0.71428; }
+    85% { opacity: 0.70419; }
+    90% { opacity: 0.7003; }
+    95% { opacity: 0.36108; }
+    100% { opacity: 0.24387; }
+}
+
+/* 登录/注册页面 */
+.retro-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #000, #0a0a0a);
+    position: relative;
+}
+
+.auth-box {
+    background: var(--retro-surface);
+    border: 2px solid var(--retro-primary);
+    border-radius: 0;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: var(--retro-glow);
+    position: relative;
+}
+
+.logo-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.logo i {
+    font-size: 3rem;
+    color: var(--retro-primary);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.logo h1 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2.5rem;
+    color: var(--retro-primary);
+    text-shadow: 0 0 10px var(--retro-primary);
+}
+
+.year {
+    color: var(--retro-secondary);
+}
+
+.tagline {
+    color: var(--retro-text);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.loading-bar {
+    height: 4px;
+    background: var(--retro-border);
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress {
+    height: 100%;
+    background: var(--retro-primary);
+    width: 0;
+    animation: loading 3s ease-in-out;
+}
+
+@keyframes loading {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border: 1px solid var(--retro-primary);
+}
+
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--retro-text);
+    padding: 1rem;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s;
+}
+
+.tab-btn.active {
+    background: var(--retro-primary);
+    color: var(--retro-bg);
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--retro-primary);
+    font-family: 'Share Tech Mono', monospace;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    background: var(--retro-bg);
+    border: 1px solid var(--retro-primary);
+    color: var(--retro-text-bright);
+    padding: 0.75rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--retro-primary);
+}
+
+.retro-btn {
+    width: 100%;
+    background: transparent;
+    border: 2px solid var(--retro-primary);
+    color: var(--retro-primary);
+    padding: 1rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+    margin-bottom: 1rem;
+}
+
+.retro-btn:hover {
+    background: var(--retro-primary);
+    color: var(--retro-bg);
+    box-shadow: var(--retro-glow);
+}
+
+.retro-btn.secondary {
+    border-color: var(--retro-secondary);
+    color: var(--retro-secondary);
+}
+
+.retro-btn.secondary:hover {
+    background: var(--retro-secondary);
+    color: var(--retro-bg);
+}
+
+.auth-link {
+    text-align: center;
+    color: var(--retro-text);
+}
+
+.auth-link a {
+    color: var(--retro-secondary);
+    text-decoration: none;
+}
+
+.system-info {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--retro-border);
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--retro-text);
+}
+
+/* 主应用界面 */
+.retro-header {
+    background: var(--retro-surface);
+    border-bottom: 2px solid var(--retro-primary);
+    padding: 1rem;
+    box-shadow: var(--retro-shadow);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo-small {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--retro-primary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.5rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid var(--retro-warning);
+    color: var(--retro-warning);
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.logout-btn:hover {
+    background: var(--retro-warning);
+    color: var(--retro-bg);
+}
+
+.main-interface {
+    display: flex;
+    min-height: calc(100vh - 70px);
+}
+
+.sidebar {
+    width: 250px;
+    background: var(--retro-surface);
+    border-right: 2px solid var(--retro-primary);
+    padding: 1rem;
+}
+
+.nav-section {
+    margin-bottom: 2rem;
+}
+
+.nav-section h3 {
+    color: var(--retro-primary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--retro-border);
+    padding-bottom: 0.5rem;
+}
+
+.nav-item {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--retro-text);
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+    font-family: 'Courier Prime', monospace;
+}
+
+.nav-item:hover {
+    background: rgba(0, 255, 65, 0.1);
+    color: var(--retro-primary);
+}
+
+.nav-item.active {
+    background: var(--retro-primary);
+    color: var(--retro-bg);
+}
+
+.count {
+    margin-left: auto;
+    background: var(--retro-warning);
+    color: var(--retro-bg);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0;
+    font-size: 0.8rem;
+}
+
+.system-stats {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--retro-border);
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--retro-text);
+    margin-bottom: 0.5rem;
+}
+
+.content-area {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.welcome-screen {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.welcome-content h1 {
+    color: var(--retro-primary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px var(--retro-primary);
+}
+
+.welcome-text {
+    color: var(--retro-text);
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.feature-card {
+    background: var(--retro-surface);
+    border: 1px solid var(--retro-primary);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.feature-card:hover {
+    box-shadow: var(--retro-glow);
+    transform: translateY(-5px);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    color: var(--retro-primary);
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    color: var(--retro-primary);
+    font-family: 'Share Tech Mono', monospace;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: var(--retro-text);
+}
+
+.get-started-btn {
+    background: transparent;
+    border: 2px solid var(--retro-primary);
+    color: var(--retro-primary);
+    padding: 1rem 2rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+}
+
+.get-started-btn:hover {
+    background: var(--retro-primary);
+    color: var(--retro-bg);
+    box-shadow: var(--retro-glow);
+}
+
+.email-section {
+    background: var(--retro-surface);
+    border: 1px solid var(--retro-primary);
+    height: 100%;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--retro-border);
+}
+
+.section-header h2 {
+    color: var(--retro-primary);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    background: var(--retro-bg);
+    border: 1px solid var(--retro-primary);
+    color: var(--retro-text);
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+    font-family: 'Courier Prime', monospace;
+}
+
+.search-box i {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--retro-primary);
+}
+
+select {
+    background: var(--retro-bg);
+    border: 1px solid var(--retro-primary);
+    color: var(--retro-text);
+    padding: 0.5rem;
+    font-family: 'Courier Prime', monospace;
+}
+
+.email-list {
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.email-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--retro-border);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.email-item:hover {
+    background: rgba(0, 255, 65, 0.1);
+}
+
+.email-item.unread {
+    background: rgba(0, 255, 65, 0.05);
+    border-left: 3px solid var(--retro-primary);
+}
+
+.email-content {
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.email-sender {
+    color: var(--retro-primary);
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.email-subject {
+    color: var(--retro-text-bright);
+    margin-bottom: 0.25rem;
+}
+
+.email-preview {
+    color: var(--retro-text);
+    font-size: 0.9rem;
+}
+
+.email-time {
+    color: var(--retro-secondary);
+    font-size: 0.8rem;
+}
+
+.detail-section {
+    background: var(--retro-surface);
+    border: 1px solid var(--retro-primary);
+    height: 100%;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--retro-border);
+}
+
+.back-btn {
+    background: transparent;
+        flex-wrap: wrap;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+}

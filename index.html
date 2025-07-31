@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MailSummit 2000 - Your Daily Email Digest</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 登录/注册页面 -->
+    <div id="authPage" class="retro-container">
+        <div class="crt-overlay"></div>
+        <div class="auth-box">
+            <div class="logo-section">
+                <div class="logo">
+                    <i class="fas fa-envelope-open"></i>
+                    <h1>MailSummit<span class="year">2000</span></h1>
+                </div>
+                <p class="tagline">Your Personal Email Digest Assistant</p>
+                <div class="loading-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login">LOGIN</button>
+                <button class="tab-btn" data-tab="register">REGISTER</button>
+            </div>
+
+            <!-- 登录表单 -->
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label>EMAIL ADDRESS</label>
+                    <input type="email" id="loginEmail" required placeholder="user@email.com">
+                </div>
+                <div class="form-group">
+                    <label>PASSWORD</label>
+                    <input type="password" id="loginPassword" required placeholder="********">
+                </div>
+                <button type="submit" class="retro-btn">
+                    <span>CONNECT</span>
+                    <i class="fas fa-satellite-dish"></i>
+                </button>
+                <p class="auth-link">Forgot password? <a href="#">Reset here</a></p>
+            </form>
+
+            <!-- 注册表单 -->
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label>USERNAME</label>
+                    <input type="text" id="regName" required placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label>EMAIL ADDRESS</label>
+                    <input type="email" id="regEmail" required placeholder="user@email.com">
+                </div>
+                <div class="form-group">
+                    <label>PASSWORD</label>
+                    <input type="password" id="regPassword" required placeholder="Min 6 characters">
+                </div>
+                <div class="form-group">
+                    <label>CONFIRM PASSWORD</label>
+                    <input type="password" id="regConfirm" required placeholder="Re-enter password">
+                </div>
+                <button type="submit" class="retro-btn">
+                    <span>CREATE ACCOUNT</span>
+                    <i class="fas fa-user-plus"></i>
+                </button>
+            </form>
+
+            <div class="system-info">
+                <div class="status-bar">
+                    <span>System: Online</span>
+                    <span>Version: 2.0.1</span>
+                    <span>Memory: 64MB</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主应用页面 -->
+    <div id="mainApp" style="display: none;">
+        <!-- 顶部导航栏 -->
+        <header class="retro-header">
+            <div class="header-content">
+                <div class="logo-small">
+                    <i class="fas fa-envelope-open"></i>
+                    <span>MailSummit2000</span>
+                </div>
+                <div class="user-info">
+                    <span id="userEmail">user@email.com</span>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-power-off"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主界面 -->
+        <div class="main-interface">
+            <!-- 左侧导航 -->
+            <nav class="sidebar">
+                <div class="nav-section">
+                    <h3>MAILBOX</h3>
+                    <button class="nav-item active" data-folder="inbox">
+                        <i class="fas fa-inbox"></i>
+                        INBOX
+                        <span class="count" id="inboxCount">0</span>
+                    </button>
+                    <button class="nav-item" data-folder="sent">
+                        <i class="fas fa-paper-plane"></i>
+                        SENT
+                    </button>
+                    <button class="nav-item" data-folder="drafts">
+                        <i class="fas fa-file-alt"></i>
+                        DRAFTS
+                    </button>
+                    <button class="nav-item" data-folder="spam">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        SPAM
+                    </button>
+                    <button class="nav-item" data-folder="trash">
+                        <i class="fas fa-trash"></i>
+                        TRASH
+                    </button>
+                </div>
+
+                <div class="nav-section">
+                    <h3>TOOLS</h3>
+                    <button class="nav-item" onclick="showCompose()">
+                        <i class="fas fa-plus"></i>
+                        COMPOSE
+                    </button>
+                    <button class="nav-item" onclick="showSettings()">
+                        <i class="fas fa-cog"></i>
+                        SETTINGS
+                    </button>
+                </div>
+
+                <div class="system-stats">
+                    <div class="stat">
+                        <span>Storage:</span>
+                        <span>45MB/100MB</span>
+                    </div>
+                    <div class="stat">
+                        <span>Messages:</span>
+                        <span id="totalCount">0</span>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- 主内容区 -->
+            <main class="content-area">
+                <!-- 欢迎页面 -->
+                <div id="welcomePage" class="welcome-screen">
+                    <div class="welcome-content">
+                        <h1>Welcome to MailSummit 2000</h1>
+                        <p class="welcome-text">
+                            Your intelligent email digest assistant that helps you stay organized 
+                            in the digital age. We automatically summarize your daily emails 
+                            so you never miss important information.
+                        </p>
+                        
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-chart-line"></i>
+                                <h3>Daily Summaries</h3>
+                                <p>Get concise summaries of all your emails every morning</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-filter"></i>
+                                <h3>Smart Filtering</h3>
+                                <p>Automatically categorize important vs promotional emails</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-bell"></i>
+                                <h3>Priority Alerts</h3>
+                                <p>Instant notifications for urgent messages</p>
+                            </div>
+                        </div>
+
+                        <button class="get-started-btn" onclick="showInbox()">
+                            <span>GET STARTED</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 邮件列表 -->
+                <div id="emailListSection" class="email-section" style="display: none;">
+                    <div class="section-header">
+                        <h2 id="currentFolderTitle">INBOX</h2>
+                        <div class="controls">
+                            <div class="search-box">
+                                <input type="text" id="searchInput" placeholder="Search messages...">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <select id="sortSelect">
+                                <option value="date-desc">Newest First</option>
+                                <option value="date-asc">Oldest First</option>
+                                <option value="sender">From A-Z</option>
+                                <option value="subject">Subject A-Z</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="email-list" id="emailList">
+                        <!-- 邮件列表将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+
+                <!-- 邮件详情 -->
+                <div id="emailDetailSection" class="detail-section" style="display: none;">
+                    <div class="detail-header">
+                        <button class="back-btn" onclick="backToList()">
+                            <i class="fas fa-arrow-left"></i>
+                            BACK
+                        </button>
+                        <div class="detail-actions">
+                            <button class="action-btn" onclick="replyEmail()">
+                                <i class="fas fa-reply"></i>
+                                REPLY
+                            </button>
+                            <button class="action-btn" onclick="deleteEmail()">
+                                <i class="fas fa-trash"></i>
+                                DELETE
+                            </button>
+                        </div>
+                    </div>
+                    <div class="email-detail-content" id="emailDetail">
+                        <!-- 邮件详情将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- 写邮件模态框 -->
+        <div class="modal" id="composeModal">
+            <div class="modal-content retro-modal">
+                <div class="modal-header">
+                    <h2>COMPOSE MESSAGE</h2>
+                    <button class="close-btn" onclick="closeCompose()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="composeForm">
+                    <div class="form-group">
+                        <label>TO:</label>
+                        <input type="email" id="composeTo" required placeholder="recipient@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>SUBJECT:</label>
+                        <input type="text" id="composeSubject" required placeholder="Message subject">
+                    </div>
+                    <div class="form-group">
+                        <label>MESSAGE:</label>
+                        <textarea id="composeBody" rows="8" required placeholder="Type your message here..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="retro-btn">
+                            <span>SEND</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <button type="button" class="retro-btn secondary" onclick="saveDraft()">
+                            <span>SAVE DRAFT</span>
+                            <i class="fas fa-save"></i>
+                        </button>
+                        <button type="button" class="retro-btn secondary" onclick="closeCompose()">
+                            <span>CANCEL</span>
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 通知 -->
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
