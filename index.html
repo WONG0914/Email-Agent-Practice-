@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MailSummit 2000 - Your Daily Email Digest</title>
+    <title>Wong's Agent - Your Personal Email Manager</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
@@ -15,7 +15,7 @@
             <div class="logo-section">
                 <div class="logo">
                     <i class="fas fa-envelope-open"></i>
-                    <h1>MailSummit<span class="year">2000</span></h1>
+                    <h1>Wong's Agent</h1>
                 </div>
                 <p class="tagline">Your Personal Email Digest Assistant</p>
                 <div class="loading-bar">
@@ -86,7 +86,7 @@
             <div class="header-content">
                 <div class="logo-small">
                     <i class="fas fa-envelope-open"></i>
-                    <span>MailSummit2000</span>
+                    <span>Wong's Agent</span>
                 </div>
                 <div class="user-info">
                     <span id="userEmail">user@email.com</span>
@@ -108,6 +108,11 @@
                         INBOX
                         <span class="count" id="inboxCount">0</span>
                     </button>
+                    <button class="nav-item" data-folder="today" onclick="showToday()">
+                        <i class="fas fa-calendar-day"></i>
+                        TODAY
+                        <span class="count">0</span>
+                    </button>
                     <button class="nav-item" data-folder="sent">
                         <i class="fas fa-paper-plane"></i>
                         SENT
@@ -116,9 +121,17 @@
                         <i class="fas fa-file-alt"></i>
                         DRAFTS
                     </button>
+                    <button class="nav-item" data-folder="important">
+                        <i class="fas fa-star"></i>
+                        IMPORTANT
+                    </button>
                     <button class="nav-item" data-folder="spam">
                         <i class="fas fa-exclamation-triangle"></i>
                         SPAM
+                    </button>
+                    <button class="nav-item" data-folder="archive">
+                        <i class="fas fa-archive"></i>
+                        ARCHIVE
                     </button>
                     <button class="nav-item" data-folder="trash">
                         <i class="fas fa-trash"></i>
@@ -155,7 +168,7 @@
                 <!-- 欢迎页面 -->
                 <div id="welcomePage" class="welcome-screen">
                     <div class="welcome-content">
-                        <h1>Welcome to MailSummit 2000</h1>
+                        <h1>Welcome to Wong's Agent</h1>
                         <p class="welcome-text">
                             Your intelligent email digest assistant that helps you stay organized 
                             in the digital age. We automatically summarize your daily emails 
@@ -180,7 +193,7 @@
                             </div>
                         </div>
 
-                        <button class="get-started-btn" onclick="showInbox()">
+                        <button class="get-started-btn" onclick="emailManager.showInbox()">
                             <span>GET STARTED</span>
                             <i class="fas fa-arrow-right"></i>
                         </button>

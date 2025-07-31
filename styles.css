@@ -1,4 +1,4 @@
-/* 2000年代美国复古风格 - MailSummit 2000 */
+/* 2000年代美国复古风格 - Wong's Agent */
 
 :root {
     --retro-bg: #0a0a0a;
@@ -519,6 +519,7 @@ select {
     font-family: 'Courier Prime', monospace;
 }
 
+/* 增强邮件列表样式 */
 .email-list {
     height: calc(100vh - 200px);
     overflow-y: auto;
@@ -531,10 +532,12 @@ select {
     border-bottom: 1px solid var(--retro-border);
     cursor: pointer;
     transition: all 0.3s;
+    position: relative;
 }
 
 .email-item:hover {
     background: rgba(0, 255, 65, 0.1);
+    transform: translateX(2px);
 }
 
 .email-item.unread {
@@ -542,32 +545,80 @@ select {
     border-left: 3px solid var(--retro-primary);
 }
 
+.email-item.priority-urgent {
+    border-left: 3px solid var(--retro-warning);
+}
+
+.email-item.priority-high {
+    border-left: 3px solid var(--retro-primary);
+}
+
+.email-item.priority-low {
+    border-left: 3px solid var(--retro-secondary);
+}
+
+.email-item.priority-spam {
+    border-left: 3px solid #666;
+}
+
+.email-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--retro-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 1.2em;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
 .email-content {
     flex: 1;
-    margin-left: 1rem;
+}
+
+.email-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
 }
 
 .email-sender {
-    color: var(--retro-primary);
     font-weight: bold;
-    margin-bottom: 0.25rem;
-}
-
-.email-subject {
-    color: var(--retro-text-bright);
-    margin-bottom: 0.25rem;
-}
-
-.email-preview {
-    color: var(--retro-text);
-    font-size: 0.9rem;
+    color: var(--retro-primary);
 }
 
 .email-time {
-    color: var(--retro-secondary);
-    font-size: 0.8rem;
+    font-size: 0.9em;
+    color: var(--text-secondary);
 }
 
+.email-subject {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--retro-text-bright);
+}
+
+.email-preview {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.email-attachments {
+    color: var(--retro-secondary);
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.email-important {
+    color: var(--retro-warning);
+    margin-left: 10px;
+}
+
+/* 邮件详情增强 */
 .detail-section {
     background: var(--retro-surface);
     border: 1px solid var(--retro-primary);
@@ -580,15 +631,449 @@ select {
     align-items: center;
     padding: 1rem;
     border-bottom: 1px solid var(--retro-border);
+    background: rgba(0, 255, 65, 0.05);
 }
 
 .back-btn {
     background: transparent;
+    border: 1px solid var(--retro-primary);
+    color: var(--retro-primary);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    background: var(--retro-primary);
+    color: var(--retro-bg);
+}
+
+.detail-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid var(--retro-secondary);
+    color: var(--retro-secondary);
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 0;
+}
+
+.action-btn:hover {
+    background: var(--retro-secondary);
+    color: var(--retro-bg);
+}
+
+.delete-btn:hover {
+    background: var(--retro-warning);
+    border-color: var(--retro-warning);
+    color: var(--retro-bg);
+}
+
+.email-detail-content {
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.detail-subject {
+    color: var(--retro-primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Share Tech Mono', monospace;
+    text-shadow: 0 0 5px var(--retro-primary);
+}
+
+.detail-meta {
+    background: rgba(0, 255, 65, 0.05);
+    padding: 1rem;
+    border-radius: 0;
+    margin-bottom: 1rem;
+    font-family: 'Courier Prime', monospace;
+    border-left: 3px solid var(--retro-primary);
+}
+
+.email-summary {
+    background: rgba(0, 128, 255, 0.1);
+    border: 1px solid var(--retro-secondary);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0;
+}
+
+.detail-body {
+    color: var(--retro-text);
+    line-height: 1.8;
+    white-space: pre-wrap;
+    font-family: 'Courier Prime', monospace;
+}
+
+.detail-attachments {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(0, 255, 65, 0.05);
+    border: 1px solid var(--retro-border);
+}
+
+.detail-attachments h4 {
+    color: var(--retro-primary);
+    margin-bottom: 0.5rem;
+}
+
+.attachment {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    background: var(--retro-bg);
+    border: 1px solid var(--retro-border);
+}
+
+/* 空状态 */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--retro-text);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: var(--retro-primary);
+    margin-bottom: 1rem;
+}
+
+.empty-action-btn {
+    background: transparent;
+    border: 1px solid var(--retro-primary);
+    color: var(--retro-primary);
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.empty-action-btn:hover {
+    background: var(--retro-primary);
+    color: var(--retro-bg);
+}
+
+/* 设置模态框 */
+.settings-content {
+    padding: 2rem;
+}
+
+.settings-section {
+    margin-bottom: 2rem;
+}
+
+.settings-section h3 {
+    color: var(--retro-primary);
+    margin-bottom: 1rem;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.settings-section label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--retro-text);
+    cursor: pointer;
+}
+
+.settings-section input[type="checkbox"] {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.settings-section select {
+    background: var(--retro-bg);
+    border: 1px solid var(--retro-primary);
+    color: var(--retro-text);
+    padding: 0.5rem;
+    font-family: 'Courier Prime', monospace;
+    cursor: pointer;
+}
+
+.settings-actions {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.settings-actions .retro-btn {
+    width: auto;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+}
+
+/* 模态框增强 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.retro-modal {
+    background: var(--retro-surface);
+    border: 2px solid var(--retro-primary);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--retro-glow);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--retro-border);
+}
+
+.modal-header h2 {
+    color: var(--retro-primary);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: var(--retro-warning);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.close-btn:hover {
+    color: var(--retro-primary);
+}
+
+/* 通知增强 */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--retro-surface);
+    border: 1px solid var(--retro-primary);
+    color: var(--retro-primary);
+    padding: 1rem;
+    font-family: 'Share Tech Mono', monospace;
+    z-index: 1001;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: var(--retro-shadow);
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.hide {
+    transform: translateX(100%);
+}
+
+.notification.success {
+    border-color: var(--retro-primary);
+    color: var(--retro-primary);
+}
+
+.notification.error {
+    border-color: var(--retro-warning);
+    color: var(--retro-warning);
+}
+
+.notification.info {
+    border-color: var(--retro-secondary);
+    color: var(--retro-secondary);
+}
+
+/* 响应式设计增强 */
+@media (max-width: 768px) {
+    .main-interface {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid var(--retro-primary);
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .detail-actions {
         flex-wrap: wrap;
     }
     
-    .modal-content {
+    .retro-modal {
         width: 95%;
         margin: 1rem;
     }
+}
+
+@media (max-width: 480px) {
+    .auth-box {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .logo h1 {
+        font-size: 2rem;
+    }
+    
+    .nav-item {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--retro-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--retro-primary);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--retro-secondary);
+}
+
+/* 动画效果 */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* 高优先级样式 */
+.priority-urgent {
+    border-left: 3px solid var(--retro-warning) !important;
+    background: rgba(255, 102, 0, 0.1) !important;
+}
+
+.priority-high {
+    border-left: 3px solid var(--retro-primary) !important;
+}
+
+.priority-normal {
+    border-left: 3px solid var(--retro-secondary) !important;
+}
+
+.priority-low {
+    border-left: 3px solid #666 !important;
+}
+
+.priority-spam {
+    border-left: 3px solid #444 !important;
+    opacity: 0.7;
+}
+
+/* 重要邮件标记 */
+.email-important {
+    color: var(--retro-warning);
+    font-size: 0.8rem;
+}
+
+/* 今日视图特殊样式 */
+.today-section {
+    background: linear-gradient(135deg, var(--retro-surface), rgba(0, 255, 65, 0.05));
+}
+
+/* 搜索高亮 */
+.search-highlight {
+    background: rgba(0, 255, 65, 0.3);
+    padding: 0.1rem 0.2rem;
+    border-radius: 0;
+}
+
+/* 加载动画 */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--retro-primary);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 工具提示 */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: var(--retro-surface);
+    color: var(--retro-text);
+    text-align: center;
+    border-radius: 0;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border: 1px solid var(--retro-primary);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }

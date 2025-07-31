@@ -1,0 +1,28 @@
+{
+  "name": "wongs-agent-gmail-classifier",
+  "version": "1.0.0",
+  "description": "Wong's Agent - Gmail API Auto Classifier for promotional emails",
+  "main": "gmail-auto-classifier.js",
+  "scripts": {
+    "start": "node gmail-auto-classifier.js",
+    "auth": "node get-token.js",
+    "setup-db": "mysql -u root -p < database-setup.sql",
+    "dev": "nodemon gmail-auto-classifier.js"
+  },
+  "keywords": [
+    "gmail",
+    "email",
+    "classification",
+    "promotional",
+    "filtering",
+    "automation"
+  ],
+  "author": "Wong's Agent",
+  "license": "MIT",
+  "dependencies": {
+    "googleapis": "^126.0.1",
+    "mysql2": "^3.6.5",
+    "nodemon": "^3.0.2"
+  },
+  "devDependencies": {}
+}
